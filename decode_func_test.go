@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"net/http"
 	"testing"
+
+	"golang.org/x/net/context"
 )
 
 func TestDecodeFuncPassThrough(t *testing.T) {
 	funcCalled := false
-	myFunc := func(req *http.Request) (request interface{}, err error) {
+	myFunc := func(ctx context.Context, req *http.Request) (request interface{}, err error) {
 		funcCalled = true
 		return "pass", fmt.Errorf("notanerror")
 	}
@@ -16,8 +18,9 @@ func TestDecodeFuncPassThrough(t *testing.T) {
 	val := new(PassingValidator)
 	wrapped := NewDecodeFunc(val, myFunc)
 
+	ctx := context.Background()
 	req, _ := http.NewRequest("GET", "dummyURL", nil)
-	result, err := wrapped(req)
+	result, err := wrapped(ctx, req)
 
 	if !funcCalled {
 		t.Errorf("My decode function should have been called. It wasn't.")
@@ -35,7 +38,7 @@ func TestDecodeFuncPassThrough(t *testing.T) {
 
 func TestCanBlockDecodeOnFailure(t *testing.T) {
 	funcCalled := false
-	myFunc := func(req *http.Request) (request interface{}, err error) {
+	myFunc := func(ctx context.Context, req *http.Request) (request interface{}, err error) {
 		funcCalled = true
 		return "pass", nil
 	}
@@ -43,8 +46,9 @@ func TestCanBlockDecodeOnFailure(t *testing.T) {
 	val := new(FailingValidator)
 	wrapped := NewDecodeFunc(val, myFunc)
 
+	ctx := context.Background()
 	req, _ := http.NewRequest("GET", "dummyURL", nil)
-	result, err := wrapped(req)
+	result, err := wrapped(ctx, req)
 
 	if funcCalled {
 		t.Errorf("My decode function should not have been called. It was.")

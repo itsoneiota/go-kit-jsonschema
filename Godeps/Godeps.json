@@ -5,20 +5,20 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/go-kit/kit/endpoint",
-			"Rev": "60b4d800f541554ebca34ea77265e574b2ca79a9"
+			"Rev": "e82fca6ef3304f43c54f07b53d20324ab646b7c4"
 		},
 		{
 			"ImportPath": "github.com/go-kit/kit/log",
-			"Rev": "60b4d800f541554ebca34ea77265e574b2ca79a9"
+			"Rev": "e82fca6ef3304f43c54f07b53d20324ab646b7c4"
 		},
 		{
 			"ImportPath": "github.com/go-kit/kit/transport/http",
-			"Rev": "60b4d800f541554ebca34ea77265e574b2ca79a9"
+			"Rev": "e82fca6ef3304f43c54f07b53d20324ab646b7c4"
 		},
 		{
 			"ImportPath": "github.com/go-logfmt/logfmt",
-			"Comment": "v0.1.0",
-			"Rev": "08ab82a63ef462ac643ec79e659f023891f588f5"
+			"Comment": "v0.2.0",
+			"Rev": "a0ff333161fe5c2daed0ba52d1792bd3d2531b94"
 		},
 		{
 			"ImportPath": "github.com/go-stack/stack",
@@ -43,11 +43,11 @@
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "7f88271ea9913b72aca44fa7fc8af919eacc17ce"
+			"Rev": "96dbb961a39ddccf16860cdd355bfa639c497f23"
 		},
 		{
 			"ImportPath": "golang.org/x/net/context/ctxhttp",
-			"Rev": "7f88271ea9913b72aca44fa7fc8af919eacc17ce"
+			"Rev": "96dbb961a39ddccf16860cdd355bfa639c497f23"
 		}
 	]
 }

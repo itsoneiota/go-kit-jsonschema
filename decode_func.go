@@ -5,13 +5,15 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"golang.org/x/net/context"
+
 	httptransport "github.com/go-kit/kit/transport/http"
 )
 
 // NewDecodeFunc returns the given DecodeFunc wrapped with a
 // JSON Schema validation check.
 func NewDecodeFunc(val Validator, df httptransport.DecodeRequestFunc) httptransport.DecodeRequestFunc {
-	return func(req *http.Request) (request interface{}, err error) {
+	return func(ctx context.Context, req *http.Request) (request interface{}, err error) {
 		// Read the content from the request, then push it back in so the next
 		// func can read it again.
 		var bodyBytes []byte
@@ -24,6 +26,6 @@ func NewDecodeFunc(val Validator, df httptransport.DecodeRequestFunc) httptransp
 		if valid, err := val.ValidateString(bodyString); !valid {
 			return nil, err
 		}
-		return df(req)
+		return df(ctx, req)
 	}
 }
